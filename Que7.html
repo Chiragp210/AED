@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Que 7</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular-csp.css" integrity="sha512-f7WVHp6iaZ7iOx9duYm67KLwCFJ9KirfMIK0MAOxf1wq5M8Ogdw5ljbCxlk/BtWIbyXWMsIaDaqwUpXttPQ/5g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./module.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" ng-app="myApp" ng-controller="myCtrl7">
+ 
+        <div  class="container">
+            Search Subject: <input type="text" class="form-control w-25 mb-5" ng-model="search">
+            <table class="table table-responsive">
+                    <tr>
+                        <th>Subject Name</th>
+                    </tr> 
+                    <tr ng-repeat="item in subject | filter : search">
+                        <td>{{item.sub}}</td>
+                    </tr>                  
+            </table>
+        </div>
+    </div>
+    <script>
+        const app = angular.module("myApp", [])
+        app.controller("myCtrl7",function($scope){
+    $scope.subject = [
+        {"sub":"C++"},
+        {"sub":"Java"},
+        {"sub":"Flutter"},
+        {"sub":"AWD"},
+        {"sub":"Data Structure and Algorithms"},
+        {"sub":"Data Science"},
+    ]
+    $scope.qty = 0;
+})
+    </script>
+</body>
+</html>

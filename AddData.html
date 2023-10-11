@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+
+  <title>Add Data Page</title>
+</head>
+
+<body ng-app="customerApp" ng-controller="customerCtrl">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Jalaram Krupa</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" style="margin: 10px;">
+            <a class="btn btn-inline-primary" aria-current="page" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item" style="margin: 10px;">
+            <a class="btn btn-inline-primary" aria-current="page" href="AddData.html">Add Data</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" ng-model="serData" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- Add data form -->
+  <form ng-submit="AddUser()" style="margin: 20px;">
+    <table class="table table-info">
+      <tr>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.name" placeholder="Customer Name"></td>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.mobile" placeholder="Customer Mobile">
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.address" placeholder="Customer Address">
+        </td>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.type" placeholder="Customer type"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.height1" placeholder="Height 1"></td>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.height2" placeholder="Height 2"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.width1" placeholder="Width 1"></td>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.width2" placeholder="Width 2"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.cross1" placeholder="Cross 1"></td>
+        <td><input type="text" class="form-control" ng-model="newCustomerData.cross2" placeholder="Cross 2"></td>
+      </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Insert</button>
+  </form><br><br><br>
+  <!-- Data Table-->
+  <h1>Customer Details</h1>
+  <hr>
+  <table class="table table-info table-hover">
+    <tr>
+      <th>Name</th>
+      <th>Mobile No.</th>
+      <th>Address</th>
+      <th>Type</th>
+      <th>Height 1</th>
+      <th>Height 2</th>
+      <th>Width 1</th>
+      <th>Width 2</th>
+      <th>Cross 1</th>
+      <th>Cross 2</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr ng-repeat="item in customerData | filter: {name:serData} track by $index">
+      <th style="display: none;" scope="row">{{item._id}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.mobile}}</td>
+      <td>{{item.address}}</td>
+      <td>{{item.type}}</td>
+      <td>{{item.height1}}</td>
+      <td>{{item.height2}}</td>
+      <td>{{item.width1}}</td>
+      <td>{{item.width2}}</td>
+      <td>{{item.cross1}}</td>
+      <td>{{item.cross2}}</td>
+      <td><button type="button" class="btn btn-warning" ng-click="updateItem(item)">Update</button></td>
+      <td><button type="button" class="btn btn-danger" ng-click="deleteItem(item._id)">Delete</button></td>
+    </tr>
+  </table><br><br><br>
+
+  <form ng-show="edit" method="post" ng-submit="editItem(updatedItem)" style="margin: 20px;">
+    <input type="text" class="form-control" placeholder="Enter User ID" ng-model="updatedItem._id"
+            ng-disabled="true">
+    <table class="table table-info">
+      <tr>
+        <td><input type="text" class="form-control" ng-model="updatedItem.name" placeholder="Customer Name"></td>
+        <td><input type="text" class="form-control" ng-model="updatedItem.mobile" placeholder="Customer Mobile">
+        </td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="updatedItem.address" placeholder="Customer Address">
+        </td>
+        <td><input type="text" class="form-control" ng-model="updatedItem.type" placeholder="Customer type"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="updatedItem.height1" placeholder="Height 1"></td>
+        <td><input type="text" class="form-control" ng-model="updatedItem.height2" placeholder="Height 2"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="updatedItem.width1" placeholder="Width 1"></td>
+        <td><input type="text" class="form-control" ng-model="updatedItem.width2" placeholder="Width 2"></td>
+      </tr>
+      <tr>
+        <td><input type="text" class="form-control" ng-model="updatedItem.cross1" placeholder="Cross 1"></td>
+        <td><input type="text" class="form-control" ng-model="updatedItem.cross2" placeholder="Cross 2"></td>
+      </tr>
+    </table>
+    <button type="submit" value="Update User" class="btn btn-warning">Update User</button>
+  </form><br><br><br>
+
+  <script src="angular.js"></script>
+  <script src="connection.js"></script>
+  <script src="AppModule.js"></script>
+</body>
+
+</html>

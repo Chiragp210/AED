@@ -1,0 +1,27 @@
+[
+  {
+    "EmpID": 101,
+    "EmpName": "Megha Patel",
+    "salary": 48000
+  },
+  {
+    "EmpID": 102,
+    "EmpName": "Seema Yadav",
+    "salary": 38000
+  },
+  {
+    "EmpID": 103,
+    "EmpName": "Heya Parekh",
+    "salary": 45000
+  },
+  {
+    "EmpID": 200,
+    "EmpName": "Pooja Sharma",
+    "salary": 50000
+  },
+  {
+    "EmpID": 200,
+    "EmpName": "Pooja Sharma",
+    "salary": 50000
+  }
+]
